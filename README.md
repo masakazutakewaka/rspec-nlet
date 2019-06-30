@@ -1,8 +1,8 @@
 # Rspec::Nlet
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rspec/nlet`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem is a RSpec extension to define multiple helpers with `let`.
 
-TODO: Delete this and the text above, and describe your gem
+Every helpers defined is lazy loaded.
 
 ## Installation
 
@@ -22,7 +22,43 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+# define multiple helpers
+> let(:one, :two, :three) { [1,2,3] }
+> one # => 1
+> two # => 2
+> three # => 3
+
+# define a helper
+> let(:single) { 'single' }
+> single # => 'single'
+
+# accept nil
+> let(:nil) { nil }
+> nil # => nil
+
+# can be overriden
+> let(:over, :ride) { ['over', 'ride'] }
+> let(:over, :ride) { [:over, 'riden'] }
+> over # => :over
+> ride # => 'riden'
+
+# raise an error when too few names are passed
+> let(:too, :few) { [1,2,3] }
+> few # => StandardError (Too few names)
+
+# raise an error when too many names are passed
+> let(:too, :many) { [1] }
+> many # => StandardError (Too many names)
+
+# raise an error when names are duplicated
+> let(:dup, :dup) { [1,2] }
+> dup # => StandardError (Names are duplicated)
+
+# raise an error when a block returns an object other than Array
+> let(:no, :array) { 1 }
+> no # => StandardError (Block returns non Array object)
+```
 
 ## Development
 
