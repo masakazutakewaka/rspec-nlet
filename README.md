@@ -1,3 +1,6 @@
+# Important note!
+I was being lazy and have just overwritten the internal of Rspec for implementation, so never use this:)
+
 # Rspec::Nlet
 
 This gem is a RSpec extension to define multiple helpers with `let`.
